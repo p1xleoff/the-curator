@@ -14,7 +14,7 @@ const Settings = () => {
                     <SettingsLink iconName={"message-star"} name="My Reviews" href="/screens/upload" />
                     <SettingsLink iconName={"heart"} name="Liked Reviews" href="/screens/upvoted" />
                     <SettingsLink iconName={"hexagon-multiple"} name="Interests" href="/screens/profile" />
-                    <SettingsLink iconName={"chart-arc"} name="Data and Storage" href="/screens/data" />
+                    <SettingsLink iconName={"chart-arc"} name="Data and Storage" href="/screens/login" />
                     <SettingsLink iconName={"lock"} name="Privacy and Security" href="/screens/product" />
                     <SettingsLink iconName={"bell-ring"} name="Notifications" href="/screens/review" />
                     <SettingsLink iconName={"translate"} name="Language" href="/screens/data" />

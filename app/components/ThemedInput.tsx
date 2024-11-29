@@ -1,45 +1,81 @@
-import { StyleSheet, TextInput, View } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, TextInput, View, TextInputProps } from 'react-native';
+import React, { useState } from 'react';
 
-export type InputProps = {
-    label?: string;
-    name: string;
-    multiline: boolean;
-    numOfLines?: number,
-    maxLength?: number,
-    placeholder?: string;
+import { useThemeColor } from '../hooks/useThemeColor';
+
+interface InputProps extends TextInputProps {
+  label?: string;
+  name?: string;
+  multiline?: boolean;
+  numOfLines?: number;
+  maxLength?: number;
+  placeholder?: string;
+  value?: string;
+  onChangeText?: (text: string) => void; // Proper typing
 }
 
-const ThemedInput = ({ label, name, multiline, numOfLines, maxLength, placeholder }: InputProps) => {
-    const [inputHeight, setInputHeight] = useState(50);
-    const handleInputSizeChange = (event: { nativeEvent: { contentSize: { height: number } } }) => {
-        setInputHeight(Math.max(50, event.nativeEvent.contentSize.height));
+const ThemedInput = ({
+  label,
+  name,
+  multiline = false,
+  numOfLines = 1,
+  maxLength,
+  placeholder,
+  value,
+  onChangeText,
+  secureTextEntry,
+  keyboardType,
+  style,
+  ...rest // for additional props like onBlur from textInput
+}: InputProps ) => {
+  const [inputHeight, setInputHeight] = useState(50);
+  const color = useThemeColor({light: '#000000', dark: '#fafafa'}, 'background')
+
+  const handleInputSizeChange = (event: {
+    nativeEvent: { contentSize: { height: number } };
+  }) => {
+    if (multiline) {
+      setInputHeight(Math.max(50, event.nativeEvent.contentSize.height));
     }
-    return (
-        <View style={styles.container}>
-            <TextInput
-                multiline={multiline}
-                style={styles.input}
-                numberOfLines={numOfLines}
-                maxLength={maxLength}
-                onContentSizeChange={handleInputSizeChange}
-                placeholder={placeholder}
-            />
-        </View>
-    )
-}
+  };
 
+  return (
+    <View style={styles.container}>
+      <TextInput
+        multiline={multiline}
+        numberOfLines={numOfLines}
+        maxLength={maxLength}
+        onContentSizeChange={handleInputSizeChange}
+        placeholder={placeholder}
+        placeholderTextColor="#a7a7a7"
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
+        value={value} // Add value prop
+        onChangeText={onChangeText} // Add onChangeText prop
+        style={[
+          styles.input,
+          multiline && { height: inputHeight },
+          {color}, // adjust multiline height
+          style,
+        ]}
+        {...rest} // additional props
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {},
-    input: {
-        borderWidth: 1,
-        borderRadius: 3,
-        padding: 10,
-        borderColor: 'gray',
-        color: '#fa640e',
-        marginTop: 10
-    }
-})
+  container: {
+    marginVertical: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 14,
+    borderColor: '#979797',
+    color: '#fa640e',
+    fontSize: 16,
+  },
+});
 
 export default ThemedInput;

@@ -1,5 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View, type ViewProps } from 'react-native'
 import React from 'react'
+import { ThemedText } from './ThemedText';
+import { useThemeColor } from '../hooks/useThemeColor';
 
 export type ButtonProps = ViewProps & {
   title: string | React.ReactElement;
@@ -7,10 +9,11 @@ export type ButtonProps = ViewProps & {
 }
 
 const Button = ({ title, onPress }: ButtonProps) => {
+  const color = useThemeColor({light: '#000000', dark: '#000000'}, 'background');
   return (
     <View>
       <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Text style={styles.title}>{title}</Text>
+      <ThemedText style={[styles.title, {color}]}>{title}</ThemedText>
       </TouchableOpacity>
     </View>
   )
@@ -20,15 +23,15 @@ export default Button;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         padding: 12,
-        backgroundColor: '#ff8800',
-        borderRadius: 5,
+        backgroundColor: '#fcc100',
+        borderRadius: 200,
         alignItems: 'center',
-        marginVertical: 10
+        marginVertical: 10,
     },
     title: {
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: 'bold',
+        letterSpacing: 1
     }
 })
