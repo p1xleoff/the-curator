@@ -3,30 +3,25 @@ import React from 'react'
 import { ThemedText } from './ThemedText';
 
 export type AccountInfoProps = ViewProps & {
-  userName: string;
   fullName: string;
   phoneNum: string;
   email: string;
 }
 
-const AccountInfoCard = ({ userName, fullName, phoneNum, email }: AccountInfoProps) => {
+const AccountInfoCard = ({ fullName, phoneNum, email }: AccountInfoProps) => {
   return (
     <View style={styles.container}>
       <View>
         <View style={styles.field}>
-          <ThemedText>Username</ThemedText>
-          <TextInput style={styles.input} value={userName} />
-        </View>
+          <ThemedText type='subtext'>Email</ThemedText>
+          <TextInput style={[styles.input, {borderBottomWidth: 0}]} value={email} />
+        </View>     
         <View style={styles.field}>
-          <ThemedText>Name</ThemedText>
+          <ThemedText type='subtext'>Name</ThemedText>
           <TextInput style={styles.input} value={fullName} />
         </View>
         <View style={styles.field}>
-          <ThemedText>Email</ThemedText>
-          <TextInput style={styles.input} value={email} />
-        </View>     
-        <View style={styles.field}>
-          <ThemedText>Phone</ThemedText>
+          <ThemedText type='subtext'>Phone</ThemedText>
           <TextInput style={styles.input}  value={phoneNum}/>
         </View>
       </View>
@@ -41,7 +36,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   input: {
-    paddingVertical: 10,
+    paddingVertical: 5,
     fontSize: 16,
     fontWeight: 'bold',
     borderBottomWidth: 1

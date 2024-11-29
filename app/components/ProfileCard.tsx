@@ -1,7 +1,10 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 
+import auth from "@react-native-firebase/auth"
+
 const ProfileCard = () => {
+    const user = auth().currentUser;
     return (
         <View style={styles.container}>
             <View style={styles.profileCard}>
@@ -12,8 +15,8 @@ const ProfileCard = () => {
                     }}
                 />
                 <View>
-                    <Text style={styles.title}>p1xLe</Text>
-                    <Text style={styles.userStatText}>Peter Parker</Text>
+                    <Text style={styles.title}>{user.displayName}</Text>
+                    <Text style={styles.userStatText}>{user.displayName}</Text>
                 </View>
             </View>
 

@@ -1,4 +1,4 @@
-import { Text, TextInput, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import React from "react";
 
 //firebase
@@ -7,7 +7,7 @@ import { logIn } from "../services/firebase";
 //hooks and utils
 import * as Yup from "yup";
 import { Link, router } from "expo-router";
-import { Loader } from "../components/Loading";
+import { SmallLoader } from "../components/Loading";
 import Button from "../components/Button";
 import { Formik } from "formik";
 import { ThemedText } from "../components/ThemedText";
@@ -99,7 +99,7 @@ const Login = () => {
               />
               <View style={{ marginTop: 30 }}>
                 <Button
-                  title={isSubmitting ? <Loader /> : "Login"}
+                  title={isSubmitting ? <SmallLoader /> : "Login"}
                   onPress={handleSubmit}
                 />
                 <View
@@ -107,7 +107,7 @@ const Login = () => {
                 >
                   <ThemedText>
                     Dont have an account?
-                    <Link href="/screens/signup">
+                    <Link href="/signup">
                       <Text style={styles.loginLink}>&nbsp;Sign up</Text>
                     </Link>
                   </ThemedText>
@@ -133,8 +133,7 @@ const styles = StyleSheet.create({
   },
   loginLink: {
     color: "#ff7b00",
-    fontWeight: "900",
-    fontSize: 18,
+    fontWeight: "600",
   },
   errorText: {
     color: "#ff1e00",

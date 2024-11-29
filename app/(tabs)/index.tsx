@@ -6,13 +6,13 @@ import Header from '../components/Header'
 
 const Home = () => {
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Header title='The Curator' />
       <SearchBar />
       <View>
       </View>
       <ItemCard />
-    </ScrollView>
+    </View>
   )
 }
 

@@ -118,7 +118,7 @@ const Signup = () => {
                 >
                   <ThemedText>
                     Already have an account?
-                    <Link href="/screens/login">
+                    <Link href="/login">
                       <Text style={styles.signupLink}>&nbsp;Login</Text>
                     </Link>
                   </ThemedText>

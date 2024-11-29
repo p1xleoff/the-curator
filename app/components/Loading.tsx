@@ -41,8 +41,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ReLoader: {
-    flex: 1,
     alignItems: 'center',
-    padding: 0
   },
 });
