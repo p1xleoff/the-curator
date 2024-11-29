@@ -36,5 +36,4 @@ yarn-error.*
 *.tsbuildinfo
 
 # platform folders
-android/
 ios/

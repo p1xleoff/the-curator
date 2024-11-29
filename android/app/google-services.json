@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "777394416672",
+    "project_id": "the-curat0r",
+    "storage_bucket": "the-curat0r.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777394416672:android:6237161a811975bb42a045",
+        "android_client_info": {
+          "package_name": "com.p1xle.curator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_tQgLVA7fUAEks1sBMShLT1K3tZPek2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
