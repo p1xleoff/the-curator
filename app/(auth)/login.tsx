@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 import React from "react";
 
 //firebase
-import { logIn } from "../services/firebase";
+import { logIn } from "../services/firebase/firebase";
 
 //hooks and utils
 import * as Yup from "yup";

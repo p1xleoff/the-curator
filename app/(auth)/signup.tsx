@@ -9,7 +9,7 @@ import * as Yup from "yup";
 
 //components
 import { Loader } from "../components/Loading";
-import { signUp } from "../services/firebase";
+import { signUp } from "../services/firebase/firebase";
 import { Link, router } from "expo-router";
 import { ThemedText } from "../components/ThemedText";
 import ThemedInput from "../components/ThemedInput";
