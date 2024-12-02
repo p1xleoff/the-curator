@@ -5,7 +5,7 @@ import { Platform } from 'react-native';
 
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useColorScheme } from '../hooks/useColorScheme';
-import { Colors } from '../constants/Color';
+import { Colors } from '../constants/Colors';
 
 
 export default function TabLayout() {
