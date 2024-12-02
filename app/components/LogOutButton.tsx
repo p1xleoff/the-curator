@@ -4,7 +4,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 //firebase
 import auth from "@react-native-firebase/auth";
-import { signOut } from "../services/firebase";
+import { signOut } from "../services/firebase/firebase";
 
 const LogOutButton = () => {
   const user = auth().currentUser;
