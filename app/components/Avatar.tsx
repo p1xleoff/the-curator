@@ -1,4 +1,4 @@
-import { StyleSheet, Image, View, type ViewProps } from "react-native";
+import { Image, View, type ViewProps } from "react-native";
 import React from "react";
 
 export type AvatarProps = ViewProps & {
@@ -17,7 +17,5 @@ const Avatar = ({ size }: AvatarProps) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default Avatar;

@@ -1,14 +1,9 @@
 import { StyleSheet, Text, TextInput, View, type ViewProps } from 'react-native'
 import React from 'react'
 import { ThemedText } from './ThemedText';
+import { UserProfile } from '../types/userTypes';
 
-export type AccountInfoProps = ViewProps & {
-  fullName: string;
-  phoneNum: string;
-  email: string;
-}
-
-const AccountInfoCard = ({ fullName, phoneNum, email }: AccountInfoProps) => {
+const AccountInfoCard = ({ fullName, phoneNumber, email }: UserProfile) => {
   return (
     <View style={styles.container}>
       <View>
@@ -22,7 +17,7 @@ const AccountInfoCard = ({ fullName, phoneNum, email }: AccountInfoProps) => {
         </View>
         <View style={styles.field}>
           <ThemedText type='subtext'>Phone</ThemedText>
-          <TextInput style={styles.input}  value={phoneNum}/>
+          <TextInput style={styles.input}  value={phoneNumber.toString()}/>
         </View>
       </View>
     </View>

@@ -1,29 +1,25 @@
-import { StyleSheet, Text, View, type ViewProps  } from 'react-native'
-import React from 'react'
+import { StyleSheet, View, type ViewProps } from "react-native";
+import React from "react";
+import { ThemedText } from "./ThemedText";
+import SearchBar from "./SearchBar";
 
 export type HeaderProps = ViewProps & {
-    title?: string;
-  };
+  title?: string;
+};
 
-const Header = ({title}: HeaderProps) => {
+const Header = ({ title }: HeaderProps) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
+      <ThemedText type="title" style={{paddingBottom: 10}}>{title}</ThemedText>
+      <SearchBar />
     </View>
-  )
-}
-
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        paddingVertical: 15
-    },
-    text: {
-        fontSize: 26,
-        fontWeight: 'bold',
-        color: '#333333',
-        fontFamily: 'Bahnschrift'
-    },
-})
+  container: {
+    marginVertical: 10,
+  },
+});
 
 export default Header;

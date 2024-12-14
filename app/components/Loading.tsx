@@ -20,7 +20,6 @@ export const SmallLoader = () => {
     </View>
   )
 }
-
 export const Loader = () => {
   return (
     <View style={styles.ReLoader}>
@@ -44,3 +43,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default Loader;

@@ -1,7 +1,7 @@
-import { StyleSheet, TextInput, View, TextInputProps } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, TextInput, View, TextInputProps } from "react-native";
+import React, { useState } from "react";
 
-import { useThemeColor } from '../hooks/useThemeColor';
+import { useThemeColor } from "../hooks/useThemeColor";
 
 interface InputProps extends TextInputProps {
   label?: string;
@@ -18,7 +18,6 @@ const ThemedInput = ({
   label,
   name,
   multiline = false,
-  numOfLines = 1,
   maxLength,
   placeholder,
   value,
@@ -27,9 +26,12 @@ const ThemedInput = ({
   keyboardType,
   style,
   ...rest // for additional props like onBlur from textInput
-}: InputProps ) => {
+}: InputProps) => {
   const [inputHeight, setInputHeight] = useState(50);
-  const color = useThemeColor({light: '#000000', dark: '#fafafa'}, 'background')
+  const color = useThemeColor(
+    { light: "#000000", dark: "#ffffff" },
+    "background"
+  );
 
   const handleInputSizeChange = (event: {
     nativeEvent: { contentSize: { height: number } };
@@ -43,7 +45,6 @@ const ThemedInput = ({
     <View style={styles.container}>
       <TextInput
         multiline={multiline}
-        numberOfLines={numOfLines}
         maxLength={maxLength}
         onContentSizeChange={handleInputSizeChange}
         placeholder={placeholder}
@@ -54,8 +55,8 @@ const ThemedInput = ({
         onChangeText={onChangeText} // Add onChangeText prop
         style={[
           styles.input,
-          multiline && { height: inputHeight },
-          {color}, // adjust multiline height
+          multiline && { minHeight: 50, height: inputHeight },
+          { color }, // adjust multiline height
           style,
         ]}
         {...rest} // additional props
@@ -72,8 +73,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 14,
-    borderColor: '#979797',
-    color: '#fa640e',
+    borderColor: "#979797",
+    color: "#fa640e",
     fontSize: 16,
   },
 });

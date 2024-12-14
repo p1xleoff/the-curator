@@ -1,8 +1,14 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import { ThemedText } from './ThemedText';
-import StarBars from './StarBars';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React from "react";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { ThemedText } from "./ThemedText";
+import StarBars from "./StarBars";
 
 const Rating = () => {
   return (
@@ -17,47 +23,42 @@ const Rating = () => {
           <ThemedText style={styles.starNum}> 4.9</ThemedText>
         </View>
         <View style={styles.details}>
-          <ThemedText style={styles.detailsText}>1233 total reviews | 932 Verified</ThemedText>
+          <ThemedText style={styles.detailsText}>
+            1233 total reviews | 932 Verified
+          </ThemedText>
         </View>
       </View>
-      <View style={styles.starDetails}>
+      <View>
         <StarBars total={100} five={93} four={6} three={1} two={0} one={0} />
       </View>
-      <View>
-
-      </View>
+      <View></View>
     </ScrollView>
-  )
-}
-
+  );
+};
 
 const styles = StyleSheet.create({
   container: {},
   ratingContainer: {
     // backgroundColor: 'white',
-    paddingVertical: 10,
-    borderRadius: 5
+    borderRadius: 5,
   },
   rating: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginVertical: 7,
-    alignItems: 'center',
+    alignItems: "center",
   },
   icon: {
-    color: '#ecb708'
+    color: "#ecb708",
   },
   starNum: {
-    fontWeight: 'bold',
-    fontSize: 18
+    fontWeight: "bold",
+    fontSize: 18,
   },
   details: {},
   detailsText: {
     fontSize: 16,
-    fontWeight: '600'
+    fontWeight: "600",
   },
-  starDetails: {
-    marginBottom: 15
-  },
-})
+});
 
 export default Rating;

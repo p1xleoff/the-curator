@@ -1,33 +1,36 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { Link } from 'expo-router'
-import { ThemedText } from './ThemedText'
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { Link } from "expo-router";
+import { ThemedText } from "./ThemedText";
+import { useThemeColor } from "../hooks/useThemeColor";
 
 const SearchBar = () => {
-    return (
-        <View style={styles.container}>
-            <Link href='/screens/search' style={styles.searchContainer}>
-                <ThemedText style={styles.searchText}>Search for products and reviews</ThemedText>
-            </Link>
-        </View>
-    )
-}
-
+  const background = useThemeColor(
+    { light: "#dfdfdf", dark: "#222222" },
+    "background"
+  );
+  return (
+    <View>
+      <Link href="/screens/search" style={[styles.searchContainer, { backgroundColor: background }]}>
+        <ThemedText style={styles.searchText}>
+          Search for products and reviews
+        </ThemedText>
+      </Link>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-    },
-    searchContainer: {
-        backgroundColor: '#e0e0e0',
-        borderRadius: 25,
-        padding: 15,
-        elevation: 5,
-        marginBottom: 20
-    },
-    searchText: {
-        fontWeight: '600',
-        color: '#464646'
-    }
-})
+  searchContainer: {
+    borderRadius: 50,
+    padding: 12,
+    elevation: 1,
+    marginBottom: 10,
+  },
+  searchText: {
+    fontWeight: "600",
+    color: "#7c7c7c",
+  },
+});
 
 export default SearchBar;

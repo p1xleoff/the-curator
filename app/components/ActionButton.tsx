@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { Link } from 'expo-router';
@@ -11,7 +11,7 @@ const ActionButton = ({ iconName }: ActionProps) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button}>
-                <Link href='/screens/productSelect'>
+                <Link href='/screens/upload'>
                     <Icon name={iconName} size={36} color={'#fff'} />
                 </Link>
             </TouchableOpacity>

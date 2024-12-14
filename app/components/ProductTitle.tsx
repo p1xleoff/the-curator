@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
         fontSize: 34,
         fontWeight: '700',
         paddingTop: 20,
+        lineHeight: 33
     },
     category: {
         fontSize: 12,
