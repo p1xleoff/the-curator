@@ -1,29 +1,28 @@
-import { FlatList, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import ItemCard from '../components/ItemCard'
-import SearchBar from '../components/SearchBar'
-import Header from '../components/Header'
-import ActionButton from '../components/ActionButton'
+import { ScrollView, StatusBar, StyleSheet, View } from "react-native";
+import React from "react";
+import Header from "../components/Header";
+import ActionButton from "../components/ActionButton";
+import ReviewsList from "../components/ReviewsList";
+import { ThemedView } from "../components/ThemedView";
 
 const UserReviews = () => {
   return (
-    <View style={styles.container}>
-      <Header title='My Reviews' />
-      <SearchBar />
-      <ItemCard />
-
+    <ThemedView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Header title="My Reviews" />
+        <ReviewsList />
+      </ScrollView>
       <ActionButton iconName={"plus"} />
-    </View>
-  )
-}
+    </ThemedView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eeeeee',
+    marginTop: StatusBar.currentHeight,
     paddingHorizontal: 15,
-    marginTop: StatusBar.currentHeight
   },
-})
+});
 
 export default UserReviews;

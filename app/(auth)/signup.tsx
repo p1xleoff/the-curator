@@ -1,4 +1,4 @@
-import { Text, TextInput, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import React from "react";
 
 //firebase
@@ -20,6 +20,7 @@ const Signup = () => {
     username: "",
     email: "",
     password: "",
+    fullName: "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -41,7 +42,7 @@ const Signup = () => {
     try {
       const { email, password, username } = values;
       await signUp({ email, password, username });
-      router.replace('/(tabs)');
+      router.replace("/(tabs)");
       console.log("User registered");
     } catch (error: any) {
       // handle Firebase errors

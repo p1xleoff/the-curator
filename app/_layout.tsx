@@ -3,21 +3,30 @@ import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import { SplashScreen } from "expo-router";
 import { useColorScheme } from "./hooks/useColorScheme";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
-import { Platform } from "react-native";
+import { View, Platform } from "react-native";
+
+//navigation
+import { Stack, useRouter } from "expo-router";
 import {
   ThemeProvider,
   DarkTheme,
   DefaultTheme,
 } from "@react-navigation/native";
-import { Stack, useRouter } from "expo-router";
-import { View, ActivityIndicator } from "react-native";
+
+//components
+import { Loading } from "./components/Loading";
+
+//apis and services
+import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Prevent splash screen from hiding before app initialization
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const queryClient = new QueryClient();
+
   const [loaded] = useFonts({
     SpaceMono: require("./assets/fonts/SpaceMono-Regular.ttf"),
   });
@@ -32,23 +41,11 @@ export default function RootLayout() {
     if (initializing) setInitializing(false);
   }
 
-  // Detect platform
-  const isWeb = Platform.OS === "web";
-
   // Firebase authentication logic for native platforms
   useEffect(() => {
-    if (!isWeb) {
-      const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-      return () => subscriber(); // Unsubscribe on unmount
-    } else {
-      // Fallback for web: check localStorage or sessionStorage for authentication status
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) {
-        setUser(JSON.parse(storedUser)); // If a user exists in localStorage, set them as logged in
-      }
-      setInitializing(false); // Mark initialization as complete for web
-    }
-  }, [isWeb]);
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return () => subscriber(); // Unsubscribe on unmount
+  }, []);
 
   // Effect to handle navigation once initialization is complete
   useEffect(() => {
@@ -67,38 +64,36 @@ export default function RootLayout() {
     // Splash screen or loading state
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" />
+        <Loading />
       </View>
     );
   }
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack
-        screenOptions={({ route }) => {
-          const routeName = route.name.split("/").pop() ?? "Screen";
-          const formattedName = routeName.charAt(0).toUpperCase() + routeName.slice(1);
-          return {
-            title: formattedName,
-          };
-        }}
-      >
-        <Stack.Screen
-          name="(tabs)"
-          options={{
-            headerShown: false,
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <Stack
+          screenOptions={({ route }) => {
+            const routeName = route.name.split("/").pop() ?? "Screen";
+            const formattedName =
+              routeName.charAt(0).toUpperCase() + routeName.slice(1);
+            return {
+              title: formattedName,
+            };
           }}
-        />
-        <Stack.Screen
-          name="(auth)/login"
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen name="screens/about" options={{ title: "About" }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+        >
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)/signup" options={{ headerShown: false }} />
+          <Stack.Screen name="screens/about" options={{ title: "About" }} />
+          <Stack.Screen name="screens/review/[reviewId]" options={{ title: "Review" }} />
+          <Stack.Screen name="screens/product/[productId]" options={{ title: "Product" }} />
+          <Stack.Screen name="screens/upload" options={{ title: "Add Review" }} />
+          <Stack.Screen name="screens/profile/[userId]" options={{ title: "User Profile" }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

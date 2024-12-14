@@ -1,28 +1,35 @@
-import { StatusBar, StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StatusBar, StyleSheet, View, ScrollView } from 'react-native'
 import React from 'react'
 import SettingsLink from '../components/SettingsLink'
 import LogOutButton from '../components/LogOutButton'
-import ProfileCard from '../components/ProfileCard'
+import { ThemedView } from '../components/ThemedView'
+import auth from "@react-native-firebase/auth";
+import { ThemedText } from '../components/ThemedText'
+import Avatar from '../components/Avatar'
 
 const Settings = () => {
+    const user = auth().currentUser;
     return (
-        <ScrollView style={styles.container}>
-            <View>
-                <ProfileCard />
+        <ThemedView style={styles.container}>
+            <ScrollView>
+                <View style={styles.profileCard}>
+                <Avatar size={60} />
+                    <ThemedText type="title" style={{marginLeft: 20}}>{user.displayName}</ThemedText>
+                </View>
                 <View>
-                    <SettingsLink iconName={"account"} name="Account" href="/screens/account" />
-                    <SettingsLink iconName={"message-star"} name="My Reviews" href="/screens/upload" />
-                    <SettingsLink iconName={"heart"} name="Liked Reviews" href="/screens/upvoted" />
-                    <SettingsLink iconName={"hexagon-multiple"} name="Interests" href="/screens/profile" />
-                    <SettingsLink iconName={"chart-arc"} name="Data and Storage" href="/screens/about" />
-                    <SettingsLink iconName={"lock"} name="Privacy and Security" href="/screens/product" />
-                    <SettingsLink iconName={"bell-ring"} name="Notifications" href="/screens/review" />
-                    <SettingsLink iconName={"translate"} name="Language" href="/screens/data" />
+                    <SettingsLink iconName={"account-settings"} name="Account" href="/screens/account" />
+                    <SettingsLink iconName={"account"} name="My Profile" href={{pathname: "/screens/profile/[userId]", params: { userId: user.uid, userName: user.displayName }}} />
+                    <SettingsLink iconName={"comment-plus"} name="Add Review" href="/screens/upload" />
+                    <SettingsLink iconName={"text-box"} name="My Reviews" href="/(tabs)/userReviews" />
+                    <SettingsLink iconName={"chart-arc"} name="Data and Storage" href="/screens/data" />
+                    {/* <SettingsLink iconName={"lock"} name="Privacy and Security" href="/screens/data" /> */}
+                    {/* <SettingsLink iconName={"bell-ring"} name="Notifications" href="/screens/privacy" /> */}
+                    {/* <SettingsLink iconName={"translate"} name="Language" href="/screens/data" /> */}
                     <SettingsLink iconName={"information"} name="About" href="/screens/about" />
                     <LogOutButton />
                 </View>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </ThemedView>
     )
 }
 
@@ -30,13 +37,12 @@ const Settings = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#eeeeee',
         paddingHorizontal: 15,
         marginTop: StatusBar.currentHeight,
     },
     profileCard: {
         flexDirection: 'row',
-        marginTop: 15,
+        marginVertical: 20,
         alignItems: 'center',
     },
     image: {

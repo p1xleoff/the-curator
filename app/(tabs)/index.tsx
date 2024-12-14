@@ -1,28 +1,25 @@
-import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import SearchBar from '../components/SearchBar'
-import ItemCard from '../components/ItemCard'
-import Header from '../components/Header'
+import { ScrollView, StatusBar, StyleSheet, View } from "react-native";
+import React from "react";
+import Header from "../components/Header";
+import { AllReviews } from "../components/Reviews";
+import { ThemedView } from "../components/ThemedView";
 
 const Home = () => {
   return (
-    <View style={styles.container}>
-      <Header title='The Curator' />
-      <SearchBar />
-      <View>
-      </View>
-      <ItemCard />
-    </View>
-  )
-}
+    <ThemedView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Header title="The Curator" />
+        <AllReviews />
+      </ScrollView>
+    </ThemedView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#eeeeee',
     paddingHorizontal: 15,
-    marginTop: StatusBar.currentHeight
+    marginTop: StatusBar.currentHeight,
   },
-})
+});
 
 export default Home;
