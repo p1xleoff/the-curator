@@ -128,13 +128,6 @@ const Upload = () => {
     }
   };
 
-  //normalize product name
-  const reName = (name: string) => {
-    name
-      .toLowerCase()
-      .replace(/[^a-z0-9]g/, "")
-      .trim();
-  };
 
   const reviewSchema = yup.object().shape({
     title: yup.string().required("Review title is required"),
