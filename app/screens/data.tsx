@@ -1,22 +1,14 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 
 const Data = () => {
+    const openStorageSettings = () => {
+        Linking.openSettings();
+    };
     return (
         <View style={styles.container}>
             <View style={styles.innerContainer}>
-
-                <View style={styles.card}>
-                    <Text style={styles.title}>Delete Games Collection</Text>
-                    <Text style={styles.text}>This action will permanantly delete all your games from the app and clear the online cloud storage. There will be no way to restore it.</Text>
-                    <Text style={styles.text}>All the games you added will be lost forever.</Text>
-                    <TouchableOpacity style={styles.links} >
-                        <Text style={styles.linkText}>Delete Everything</Text>
-                        <MaterialCommunityIcons name="delete-outline" color='tomato' size={24} />
-                    </TouchableOpacity>
-                </View>
-
                 <View style={styles.card}>
                     <Text style={styles.title}>Clear Cache</Text>
                     <Text style={styles.text}>
@@ -25,7 +17,7 @@ const Data = () => {
                     <Text style={styles.text}>
                         Go to Storage & Cache and tap Clear Cache to clear the app cache.
                     </Text>
-                    <TouchableOpacity style={styles.links} >
+                    <TouchableOpacity style={styles.links} onPress={openStorageSettings}>
                         <Text style={styles.linkText}>Clear Cache</Text>
                         <MaterialCommunityIcons name="database-remove-outline" color='tomato' size={24} />
                     </TouchableOpacity>
