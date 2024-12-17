@@ -18,6 +18,7 @@ export type Review = {
     createdAt?: Date,
     updatedAt?: Date,
     deleted: boolean,
+    reName?:string,
 }
 
 export type ReviewProps = {

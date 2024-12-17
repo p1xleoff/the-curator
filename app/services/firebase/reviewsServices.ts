@@ -15,6 +15,7 @@ export const addReview = async (review: Review): Promise<void> => {
       userName: user.displayName,
       createdAt: firestore.FieldValue.serverTimestamp(),
       updatedAt: firestore.FieldValue.serverTimestamp(),
+      reName: review.productName.toLowerCase(),
     };
     await firestore().collection("reviews").add(reviewData);
     console.log("review added successfully");
