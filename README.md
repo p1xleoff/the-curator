@@ -1,4 +1,4 @@
-Curator - Product Review App
+<b>Curator - Product Review App</b>
 
 A cross-platform mobile application for users to write, view, and manage product reviews. Built with React Native, Expo, and Firebase.
 
