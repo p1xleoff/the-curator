@@ -27,12 +27,12 @@ const ReviewCard = ({
   );
   return (
     <View style={[styles.container, { backgroundColor: background }]}>
-      <Image
+      {/* <Image
         style={styles.image}
         source={{
           uri: "https://picsum.photos/300/200",
         }}
-      />
+      /> */}
       <Link
         href={{
           pathname: "/screens/review/[reviewId]",

@@ -67,7 +67,7 @@ const Review = () => {
             <ThemedText type="subtitle">{review.title}</ThemedText>
           </View>
         </View>
-        <ReviewImages />
+        {/* <ReviewImages /> */}
         <ThemedText type="default">{review.description}</ThemedText>
         <Section>
           <ThemedText type="subtitle">Purchase Details</ThemedText>

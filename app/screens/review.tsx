@@ -4,7 +4,6 @@ import Reviewer from "../components/Reviewer";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import ReviewImages from "../components/ReviewImages";
 import { ThemedText } from "../components/ThemedText";
-import lmao from "./lmao.json";
 import ReviewActions from "../components/ReviewActions";
 import Button from "../components/Button";
 import ProductTitle from "../components/ProductTitle";
@@ -65,9 +64,9 @@ const Review = ({ route }) => {
             <ThemedText type="default">{review.upvotes} upvotes</ThemedText>
           </View>
         </Section>
-        <Section>
+        {/* <Section>
           <ReviewImages />
-        </Section>
+        </Section> */}
         <Section>
           <ThemedText type="default">{review.description}</ThemedText>
         </Section>

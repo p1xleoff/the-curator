@@ -14,7 +14,7 @@ const About = () => {
       <AboutLink title="Version" subtext="1.0" iconName={"cheese"} />
       {/* <AboutLink title='Third Party Notices' subtext='Libraries and APIs' iconName={"file-document"} /> */}
       <TouchableOpacity
-        onPress={() => Linking.openURL("https://github.com/p1xleoff/playlist")}
+        onPress={() => Linking.openURL("https://github.com/p1xleoff/the-curator")}
       >
         <AboutLink
           title="Githib Repo"

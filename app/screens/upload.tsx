@@ -11,7 +11,6 @@ import { ThemedText } from "../components/ThemedText";
 import * as ImagePicker from "expo-image-picker";
 import { Image } from "expo-image";
 import UploadButton from "../components/UploadButton";
-import ProductTitle from "../components/ProductTitle";
 import ThemedInput from "../components/ThemedInput";
 import Button from "../components/Button";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
@@ -24,9 +23,10 @@ import Stars from "../components/Stars";
 import * as yup from "yup";
 import auth from "@react-native-firebase/auth";
 import { ThemedView } from "../components/ThemedView";
+import { uploadToCloudinary } from "../services/media/cloudinary";
 
 const Upload = () => {
-  const [mediaItems, setMediaItems] = useState<UploadMedia[]>([]);
+  // const [mediaItems, setMediaItems] = useState<UploadMedia[]>([]);
   const [productName, setProductName] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -37,47 +37,47 @@ const Upload = () => {
   const [store, setStore] = useState("");
   const user = auth().currentUser;
 
-  const openCamera = async () => {
-    const result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ["images", "videos"],
-      quality: 1,
-    });
+  // const openCamera = async () => {
+  //   const result = await ImagePicker.launchCameraAsync({
+  //     mediaTypes: ["images", "videos"],
+  //     quality: 1,
+  //   });
 
-    if (!result.canceled) {
-      const newMedia: UploadMedia[] = result.assets.map((asset) => ({
-        uri: asset.uri,
-        type: asset.type as "image" | "video",
-        duration:
-          asset.type === "video"
-            ? Math.round((asset.duration || 0) / 1000)
-            : undefined,
-      }));
-      setMediaItems((prev) => [...prev, ...newMedia]);
-    }
-  };
+  //   if (!result.canceled) {
+  //     const newMedia: UploadMedia[] = result.assets.map((asset) => ({
+  //       uri: asset.uri,
+  //       type: asset.type as "image" | "video",
+  //       duration:
+  //         asset.type === "video"
+  //           ? Math.round((asset.duration || 0) / 1000)
+  //           : undefined,
+  //     }));
+  //     setMediaItems((prev) => [...prev, ...newMedia]);
+  //   }
+  // };
 
-  const openLibrary = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images", "videos"],
-      quality: 1,
-    });
+  // const openLibrary = async () => {
+  //   const result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ["images", "videos"],
+  //     quality: 1,
+  //   });
 
-    if (!result.canceled) {
-      const newMedia: UploadMedia[] = result.assets.map((asset) => ({
-        uri: asset.uri,
-        type: asset.type as "image" | "video",
-        duration:
-          asset.type === "video"
-            ? Math.round((asset.duration || 0) / 1000)
-            : undefined,
-      }));
-      setMediaItems((prev) => [...prev, ...newMedia]);
-    }
-  };
+  //   if (!result.canceled) {
+  //     const newMedia: UploadMedia[] = result.assets.map((asset) => ({
+  //       uri: asset.uri,
+  //       type: asset.type as "image" | "video",
+  //       duration:
+  //         asset.type === "video"
+  //           ? Math.round((asset.duration || 0) / 1000)
+  //           : undefined,
+  //     }));
+  //     setMediaItems((prev) => [...prev, ...newMedia]);
+  //   }
+  // };
 
-  const deleteMedia = (uri: string) => {
-    setMediaItems((prev) => prev.filter((item) => item.uri !== uri));
-  };
+  // const deleteMedia = (uri: string) => {
+  //   setMediaItems((prev) => prev.filter((item) => item.uri !== uri));
+  // };
 
   const handleSubmit = async () => {
     try {
@@ -104,13 +104,15 @@ const Upload = () => {
         description,
         country,
         price: parseFloat(price),
-        multimedia: mediaItems.map((item) => item.uri),
+        // multimedia: [uploadMediaUrl],
         upvotes: 0,
         flagged: false,
         deleted: false,
         store,
         moderationStatus: "approved",
       };
+
+      // Save review to Firebase
       await addReview(review);
       Alert.alert("Thank you", "Your review has been submitted");
       router.back();
@@ -120,14 +122,14 @@ const Upload = () => {
           "Looks like some things are missing",
           "Please fill in all the details before submitting the review"
         );
-      } else
+      } else {
         Alert.alert(
           "Error",
           "Failed to add review, please try again after some time"
         );
+      }
     }
   };
-
 
   const reviewSchema = yup.object().shape({
     title: yup.string().required("Review title is required"),
@@ -138,22 +140,22 @@ const Upload = () => {
     country: yup.string().required("Country is required"),
   });
 
-  const renderItem = ({ item }: { item: UploadMedia }) => (
-    <View style={styles.itemContainer}>
-      <Image source={{ uri: item.uri }} style={styles.thumbnail} />
-      {item.type === "video" && (
-        <View style={styles.duration}>
-          <ThemedText>{item.duration}</ThemedText>
-        </View>
-      )}
-      <TouchableOpacity
-        style={styles.deleteButton}
-        onPress={() => deleteMedia(item.uri)}
-      >
-        <Icon name="close" size={20} color="#fff" />
-      </TouchableOpacity>
-    </View>
-  );
+  // const renderItem = ({ item }: { item: UploadMedia }) => (
+  //   <View style={styles.itemContainer}>
+  //     <Image source={{ uri: item.uri }} style={styles.thumbnail} />
+  //     {item.type === "video" && (
+  //       <View style={styles.duration}>
+  //         <ThemedText>{item.duration}</ThemedText>
+  //       </View>
+  //     )}
+  //     <TouchableOpacity
+  //       style={styles.deleteButton}
+  //       onPress={() => deleteMedia(item.uri)}
+  //     >
+  //       <Icon name="close" size={20} color="#fff" />
+  //     </TouchableOpacity>
+  //   </View>
+  // );
 
   return (
     <ThemedView style={styles.container}>
@@ -178,18 +180,18 @@ const Upload = () => {
         <Section>
           <ThemedText type="subtitle">Add photo/video</ThemedText>
           <View style={styles.rating}>
-            <UploadButton title="Click a photo" onPress={openCamera} />
-            <UploadButton title="Upload from Gallery" onPress={openLibrary} />
+            {/* <UploadButton title="Click a photo" onPress={openCamera} />
+            <UploadButton title="Upload from Gallery" onPress={openLibrary} /> */}
           </View>
         </Section>
-        <Section>
+        {/* <Section>
           <FlatList
             renderItem={renderItem}
             data={mediaItems}
             keyExtractor={(item, index) => `${item.uri}-${index}`}
             horizontal
           />
-        </Section>
+        </Section> */}
         <Section>
           <ThemedText type="subtitle">Title your review</ThemedText>
           <ThemedInput
